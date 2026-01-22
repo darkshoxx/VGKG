@@ -1,0 +1,81 @@
+@prefix ex: <http://example.org/game#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Character a rdfs:Class .
+
+ex:Door a ex:Openable,
+        rdfs:Class .
+
+ex:Event a rdfs:Class .
+
+ex:Item a rdfs:Class .
+
+ex:Openable a rdfs:Class .
+
+ex:PickupableItem a rdfs:Class ;
+    rdfs:subClassOf ex:Item .
+
+ex:Room a rdfs:Class .
+
+ex:SturdyObject a rdfs:Class .
+
+ex:Pantry a ex:Room ;
+    ex:contains ex:Trapdoor .
+
+ex:Pickup1 a ex:Pickup ;
+    ex:actor ex:Protagonist ;
+    ex:item ex:Poker ;
+    ex:source ex:DiningRoom ;
+    ex:target ex:Inventory .
+
+ex:Pickup2 a ex:Pickup ;
+    ex:actor ex:Protagonist ;
+    ex:item ex:BookOfMatches ;
+    ex:source ex:Kitchen ;
+    ex:target ex:Inventory .
+
+ex:actor a rdfs:Property ;
+    rdfs:domain ex:Pickup ;
+    rdfs:range ex:Character .
+
+ex:canBeOpenedBy a rdfs:Property ;
+    rdfs:domain ex:Door ;
+    rdfs:range rdfs:Resource .
+
+ex:contains a rdfs:Property ;
+    rdfs:domain ex:Room ;
+    rdfs:range ex:Item .
+
+ex:item a rdfs:Property ;
+    rdfs:domain ex:Pickup ;
+    rdfs:range ex:PickupableItem .
+
+ex:source a rdfs:Property ;
+    rdfs:domain ex:Pickup ;
+    rdfs:range ex:Room .
+
+ex:target a rdfs:Property ;
+    rdfs:domain ex:Pickup ;
+    rdfs:range ex:Room .
+
+ex:DiningRoom a ex:Room ;
+    ex:contains ex:Poker .
+
+ex:Kitchen a ex:Room ;
+    ex:contains ex:BookOfMatches .
+
+ex:Trapdoor a ex:Door ;
+    ex:canBeOpenedBy ex:SturdyObject .
+
+ex:Inventory ex:contains ex:BookOfMatches,
+        ex:Poker .
+
+ex:Protagonist a ex:Character .
+
+ex:BookOfMatches a ex:PickupableItem .
+
+ex:Poker a ex:PickupableItem,
+        ex:SturdyObject .
+
+ex:Pickup a rdfs:Event .
+
